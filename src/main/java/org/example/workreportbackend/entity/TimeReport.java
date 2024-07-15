@@ -8,14 +8,20 @@ import java.time.LocalDateTime;
 public class TimeReport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
+    @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
+
+    @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
+
+    @Column(name = "is_approved", nullable = false)
     private Boolean isApproved;
 
     public Long getId() {
