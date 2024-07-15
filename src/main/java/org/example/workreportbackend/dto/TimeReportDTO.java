@@ -9,7 +9,6 @@ public class TimeReportDTO {
     private LocalDateTime endTime;
     private Boolean isApproved;
 
-    // getters and setters
 
     public Long getId() {
         return id;
