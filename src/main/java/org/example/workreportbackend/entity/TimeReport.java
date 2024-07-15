@@ -18,44 +18,43 @@ public class TimeReport {
     private LocalDateTime endTime;
     private Boolean isApproved;
 
-
     public Long getId() {
         return id;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public Boolean getApproved() {
-        return isApproved;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
 
+    public Employee getEmployee() {
+        return employee;
+    }
+
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
 
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
-    public void setApproved(Boolean approved) {
-        isApproved = approved;
+    public Boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(Boolean isApproved) {
+        this.isApproved = isApproved;
     }
 }
