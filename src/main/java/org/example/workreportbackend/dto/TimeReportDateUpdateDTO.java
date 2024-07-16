@@ -2,10 +2,9 @@ package org.example.workreportbackend.dto;
 
 import java.time.LocalDateTime;
 
-public class TimeReportDTO {
+public class TimeReportDateUpdateDTO {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Long employeeId;
 
     // Getters and Setters
 
@@ -23,13 +22,5 @@ public class TimeReportDTO {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-    }
-
-    public Long getEmployeeId() {
-        return employeeId;
-    }
-
-    public void setEmployeeId(Long employeeId) {
-        this.employeeId = employeeId;
     }
 }

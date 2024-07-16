@@ -1,43 +1,46 @@
 package org.example.workreportbackend.controller;
 
 import org.example.workreportbackend.dto.TimeReportDTO;
+import org.example.workreportbackend.dto.TimeReportDateUpdateDTO;
+import org.example.workreportbackend.entity.TimeReport;
 import org.example.workreportbackend.service.TimeReportService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/time-reports")
+@CrossOrigin("http://localhost:5173")
 public class TimeReportController {
 
-    @Autowired
-    private TimeReportService timeReportService;
+    private final TimeReportService timeReportService;
+
+    public TimeReportController(TimeReportService timeReportService) {
+        this.timeReportService = timeReportService;
+    }
+
+    @GetMapping("/{timePeriod}/{id}")
+    public ResponseEntity<List<TimeReport>> getAllTimeReports(@PathVariable String timePeriod,
+                                                              @PathVariable Long id) {
+        return ResponseEntity.ok(timeReportService.getTimeReports(timePeriod, id));
+    }
 
     @PostMapping
-    public ResponseEntity<TimeReportDTO> addTimeReport(@RequestBody TimeReportDTO timeReportDTO) {
-        TimeReportDTO savedTimeReport = timeReportService.saveTimeReport(timeReportDTO);
-        return new ResponseEntity<>(savedTimeReport, HttpStatus.CREATED);
+    public ResponseEntity<TimeReport> postNewTimeReport(@RequestBody TimeReportDTO timeReportDTO) {
+        TimeReport timeReport = new TimeReport(timeReportDTO.getStartTime(), timeReportDTO.getEndTime());
+        return ResponseEntity.ok(timeReportService.addNewTimeReport(timeReport, timeReportDTO.getEmployeeId()));
     }
 
-    @GetMapping("/employee/{employeeId}")
-    public ResponseEntity<List<TimeReportDTO>> getTimeReportsByEmployee(@PathVariable Long employeeId) {
-        List<TimeReportDTO> timeReports = timeReportService.getTimeReportsByEmployeeId(employeeId);
-        return new ResponseEntity<>(timeReports, HttpStatus.OK);
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTimeReport(@PathVariable Long id) {
+        timeReportService.deleteTimeReport(id);
+        return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/approval-status/{isApproved}")
-    public ResponseEntity<List<TimeReportDTO>> getTimeReportsByApprovalStatus(@PathVariable Boolean isApproved) {
-        List<TimeReportDTO> timeReports = timeReportService.getTimeReportsByApprovalStatus(isApproved);
-        return new ResponseEntity<>(timeReports, HttpStatus.OK);
-    }
-
-    @PostMapping("/approve/{id}")
-    public ResponseEntity<TimeReportDTO> approveTimeReport(@PathVariable Long id) {
-        TimeReportDTO approvedTimeReport = timeReportService.approveTimeReport(id);
-        return new ResponseEntity<>(approvedTimeReport, HttpStatus.OK);
+    @PatchMapping("/{id}")
+    public ResponseEntity<TimeReport> updateTimeReport(@PathVariable Long id, @RequestBody TimeReportDateUpdateDTO updateDTO) {
+        TimeReport updatedTimeReport = timeReportService.updateTimeReport(id, updateDTO.getStartTime(), updateDTO.getEndTime());
+        return ResponseEntity.ok(updatedTimeReport);
     }
 }
