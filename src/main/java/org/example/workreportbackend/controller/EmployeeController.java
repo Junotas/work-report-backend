@@ -27,4 +27,10 @@ public class EmployeeController {
         List<EmployeeDTO> employees = employeeService.getAllEmployees();
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }

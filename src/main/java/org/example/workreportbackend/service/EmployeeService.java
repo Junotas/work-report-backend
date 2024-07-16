@@ -32,6 +32,10 @@ public class EmployeeService {
         return employeeRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
     }
 
+    public void deleteEmployee(Long id) {
+        employeeRepository.deleteById(id);
+    }
+
     private EmployeeDTO toDTO(Employee employee) {
         EmployeeDTO dto = new EmployeeDTO();
         dto.setId(employee.getId());
