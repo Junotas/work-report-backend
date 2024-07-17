@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/time-reports")
-@CrossOrigin
+@CrossOrigin(origins = "https://junotas.github.io", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PATCH, RequestMethod.DELETE})
 public class TimeReportController {
 
     private final TimeReportService timeReportService;
