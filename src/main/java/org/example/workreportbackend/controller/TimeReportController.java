@@ -20,9 +20,15 @@ public class TimeReportController {
         this.timeReportService = timeReportService;
     }
 
+    @GetMapping
+    public ResponseEntity<List<TimeReport>> getAllTimeReports() {
+        List<TimeReport> allReports = timeReportService.getAllTimeReports();
+        return ResponseEntity.ok(allReports);
+    }
+
     @GetMapping("/{timePeriod}/{id}")
-    public ResponseEntity<List<TimeReport>> getAllTimeReports(@PathVariable String timePeriod,
-                                                              @PathVariable Long id) {
+    public ResponseEntity<List<TimeReport>> getTimeReportsByPeriodAndEmployee(@PathVariable String timePeriod,
+                                                                              @PathVariable Long id) {
         return ResponseEntity.ok(timeReportService.getTimeReports(timePeriod, id));
     }
 

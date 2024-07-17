@@ -22,6 +22,10 @@ public class TimeReportService {
         this.employeeRepository = employeeRepository;
     }
 
+    public List<TimeReport> getAllTimeReports() {
+        return timeReportRepository.findAll();
+    }
+
     public List<TimeReport> getTimeReports(String timePeriod, Long employeeId) {
         Employee employee = employeeRepository.findById(employeeId).orElseThrow();
         if (timePeriod.equals("past")) {
