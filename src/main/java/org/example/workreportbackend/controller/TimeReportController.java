@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/time-reports")
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin
 public class TimeReportController {
 
     private final TimeReportService timeReportService;
