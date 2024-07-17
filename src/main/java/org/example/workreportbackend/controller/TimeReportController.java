@@ -44,4 +44,10 @@ public class TimeReportController {
         TimeReport updatedTimeReport = timeReportService.approveTimeReport(id, updateDTO.getIsApproved());
         return ResponseEntity.ok(updatedTimeReport);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTimeReport(@PathVariable Long id) {
+        timeReportService.deleteTimeReport(id);
+        return ResponseEntity.noContent().build();
+    }
 }
