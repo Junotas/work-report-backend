@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 public class TimeReportDateUpdateDTO {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+    private Boolean isApproved;  // Add this field
+
 
     // Getters and Setters
 
@@ -22,5 +24,12 @@ public class TimeReportDateUpdateDTO {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
+    }
+    public Boolean getIsApproved() {  // Getter for isApproved
+        return isApproved;
+    }
+
+    public void setIsApproved(Boolean isApproved) {  // Setter for isApproved
+        this.isApproved = isApproved;
     }
 }

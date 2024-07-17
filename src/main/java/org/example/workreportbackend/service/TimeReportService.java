@@ -22,6 +22,13 @@ public class TimeReportService {
         this.employeeRepository = employeeRepository;
     }
 
+    public TimeReport approveTimeReport(Long id, Boolean isApproved) {
+        TimeReport timeReport = timeReportRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid time report ID: " + id));
+        timeReport.setIsApproved(isApproved);  // Set the new approval status
+        return timeReportRepository.save(timeReport);  // Save the updated time report
+    }
+
     public List<TimeReport> getAllTimeReports() {
         return timeReportRepository.findAll();
     }

@@ -26,27 +26,15 @@ public class TimeReportController {
         return ResponseEntity.ok(allReports);
     }
 
-    @GetMapping("/{timePeriod}/{id}")
-    public ResponseEntity<List<TimeReport>> getTimeReportsByPeriodAndEmployee(@PathVariable String timePeriod,
-                                                                              @PathVariable Long id) {
-        return ResponseEntity.ok(timeReportService.getTimeReports(timePeriod, id));
-    }
-
     @PostMapping
     public ResponseEntity<TimeReport> postNewTimeReport(@RequestBody TimeReportDTO timeReportDTO) {
         TimeReport timeReport = new TimeReport(timeReportDTO.getStartTime(), timeReportDTO.getEndTime());
         return ResponseEntity.ok(timeReportService.addNewTimeReport(timeReport, timeReportDTO.getEmployeeId()));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTimeReport(@PathVariable Long id) {
-        timeReportService.deleteTimeReport(id);
-        return ResponseEntity.ok().build();
-    }
-
     @PatchMapping("/{id}")
-    public ResponseEntity<TimeReport> updateTimeReport(@PathVariable Long id, @RequestBody TimeReportDateUpdateDTO updateDTO) {
-        TimeReport updatedTimeReport = timeReportService.updateTimeReport(id, updateDTO.getStartTime(), updateDTO.getEndTime());
+    public ResponseEntity<TimeReport> approveTimeReport(@PathVariable Long id, @RequestBody TimeReportDateUpdateDTO updateDTO) {
+        TimeReport updatedTimeReport = timeReportService.approveTimeReport(id, updateDTO.getIsApproved());
         return ResponseEntity.ok(updatedTimeReport);
     }
 }
