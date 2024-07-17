@@ -33,6 +33,12 @@ public class TimeReportController {
     }
 
     @PatchMapping("/{id}")
+    public ResponseEntity<TimeReport> updateTimeReport(@PathVariable Long id, @RequestBody TimeReportDateUpdateDTO updateDTO) {
+        TimeReport updatedTimeReport = timeReportService.updateTimeReport(id, updateDTO.getStartTime(), updateDTO.getEndTime());
+        return ResponseEntity.ok(updatedTimeReport);
+    }
+
+    @PatchMapping("/approve/{id}")
     public ResponseEntity<TimeReport> approveTimeReport(@PathVariable Long id, @RequestBody TimeReportDateUpdateDTO updateDTO) {
         TimeReport updatedTimeReport = timeReportService.approveTimeReport(id, updateDTO.getIsApproved());
         return ResponseEntity.ok(updatedTimeReport);
