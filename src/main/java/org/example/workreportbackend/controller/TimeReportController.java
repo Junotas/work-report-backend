@@ -29,7 +29,8 @@ public class TimeReportController {
     @PostMapping
     public ResponseEntity<TimeReport> postNewTimeReport(@RequestBody TimeReportDTO timeReportDTO) {
         TimeReport timeReport = new TimeReport(timeReportDTO.getStartTime(), timeReportDTO.getEndTime());
-        return ResponseEntity.ok(timeReportService.addNewTimeReport(timeReport, timeReportDTO.getEmployeeId()));
+        TimeReport savedReport = timeReportService.addNewTimeReport(timeReport, timeReportDTO.getEmployeeId());
+        return ResponseEntity.ok(savedReport);
     }
 
     @PatchMapping("/{id}")
