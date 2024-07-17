@@ -1,7 +1,10 @@
 package org.example.workreportbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import java.util.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "employees")
@@ -21,8 +24,9 @@ public class Employee {
     private Boolean isAdmin;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    @JsonBackReference
     private Set<TimeReport> timeReports = new HashSet<>();
-
+    
     public Long getId() {
         return id;
     }

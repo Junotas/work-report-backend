@@ -1,5 +1,6 @@
 package org.example.workreportbackend.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -12,6 +13,7 @@ public class TimeReport {
 
     @ManyToOne
     @JoinColumn(name = "employee_id")
+    @JsonManagedReference
     private Employee employee;
 
     private LocalDateTime startTime;
