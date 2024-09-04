@@ -1,16 +1,25 @@
 spring:
   datasource:
-    url: jdbc:sqlserver://workreportserverludvig.database.windows.net:1433;database=workreportdb
+    url: jdbc:postgresql://<aws-rds-endpoint>:5432/<db-name>
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServerDialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  profiles:
+    active: prod
 
-# Additional properties
+# Server Config
 server:
   port: 8080
+
+# Other environment-specific properties
+aws:
+  region: <my-aws-region>
+  secret-key: ${AWS_SECRET_KEY}
+  access-key: ${AWS_ACCESS_KEY_ID}
