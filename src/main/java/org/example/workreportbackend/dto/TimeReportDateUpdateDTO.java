@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class TimeReportDateUpdateDTO {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-    private Boolean isApproved;  // Add this field
+    private Boolean isApproved;
 
 
     // Getters and Setters
